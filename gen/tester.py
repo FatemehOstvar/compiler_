@@ -1,21 +1,21 @@
-import sys
-from antlr4 import FileStream, CommonTokenStream
-from parser.gen.SASLexer import SASLexer
-from parser.gen.SASParser import SASParser
-from parser.gen.MySASVisitor import MySASVisitor
+from antlr4 import *
+from SASLexer import SASLexer
+from SASParser import SASParser
+from SASEvaluator import SASEvaluator
 
-def main(file_path):
-    input_stream = FileStream(file_path, encoding='utf-8')
+def main():
+    input_code = "int x = 42; int y = 3.14; int z = x + y;"
+    input_stream = InputStream(input_code)
     lexer = SASLexer(input_stream)
-    tokens = CommonTokenStream(lexer)
-    parser = SASParser(tokens)
+    token_stream = CommonTokenStream(lexer)
+    parser = SASParser(token_stream)
     tree = parser.program()
-    visitor = MySASVisitor()
-    visitor.visit(tree)
-    print("✅ Done.")
+
+    evaluator = SASEvaluator()
+    result = evaluator.visit(tree)
+
+    for var, val in result.items():
+        print(f"{var} = {val}")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python tester.py <file.sas>")
-    else:
-        main(sys.argv[1])
+    main()

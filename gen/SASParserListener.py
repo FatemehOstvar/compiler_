@@ -1,9 +1,9 @@
-# Generated from D:/pycharm/Parser/SASParser.g4 by ANTLR 4.13.2
+# Generated from D:/pycharm/Parser/parser/SASParser.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
-    from parser.gen.SASParser import SASParser
+    from .SASParser import SASParser
 else:
-    from parser.gen.SASParser import SASParser
+    from SASParser import SASParser
 
 # This class defines a complete listener for a parse tree produced by SASParser.
 class SASParserListener(ParseTreeListener):
@@ -170,30 +170,84 @@ class SASParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SASParser#mathExpr.
-    def enterMathExpr(self, ctx:SASParser.MathExprContext):
+    # Enter a parse tree produced by SASParser#assignExpr.
+    def enterAssignExpr(self, ctx:SASParser.AssignExprContext):
         pass
 
-    # Exit a parse tree produced by SASParser#mathExpr.
-    def exitMathExpr(self, ctx:SASParser.MathExprContext):
-        pass
-
-
-    # Enter a parse tree produced by SASParser#literalExpr.
-    def enterLiteralExpr(self, ctx:SASParser.LiteralExprContext):
-        pass
-
-    # Exit a parse tree produced by SASParser#literalExpr.
-    def exitLiteralExpr(self, ctx:SASParser.LiteralExprContext):
+    # Exit a parse tree produced by SASParser#assignExpr.
+    def exitAssignExpr(self, ctx:SASParser.AssignExprContext):
         pass
 
 
-    # Enter a parse tree produced by SASParser#funcCallExpr.
-    def enterFuncCallExpr(self, ctx:SASParser.FuncCallExprContext):
+    # Enter a parse tree produced by SASParser#logicOrPass.
+    def enterLogicOrPass(self, ctx:SASParser.LogicOrPassContext):
         pass
 
-    # Exit a parse tree produced by SASParser#funcCallExpr.
-    def exitFuncCallExpr(self, ctx:SASParser.FuncCallExprContext):
+    # Exit a parse tree produced by SASParser#logicOrPass.
+    def exitLogicOrPass(self, ctx:SASParser.LogicOrPassContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#logicalExpr.
+    def enterLogicalExpr(self, ctx:SASParser.LogicalExprContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#logicalExpr.
+    def exitLogicalExpr(self, ctx:SASParser.LogicalExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#bitwisePass.
+    def enterBitwisePass(self, ctx:SASParser.BitwisePassContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#bitwisePass.
+    def exitBitwisePass(self, ctx:SASParser.BitwisePassContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#bitwiseExpr.
+    def enterBitwiseExpr(self, ctx:SASParser.BitwiseExprContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#bitwiseExpr.
+    def exitBitwiseExpr(self, ctx:SASParser.BitwiseExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#compareExpr.
+    def enterCompareExpr(self, ctx:SASParser.CompareExprContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#compareExpr.
+    def exitCompareExpr(self, ctx:SASParser.CompareExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#addSub.
+    def enterAddSub(self, ctx:SASParser.AddSubContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#addSub.
+    def exitAddSub(self, ctx:SASParser.AddSubContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#mulDivMod.
+    def enterMulDivMod(self, ctx:SASParser.MulDivModContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#mulDivMod.
+    def exitMulDivMod(self, ctx:SASParser.MulDivModContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#unaryOpExpr.
+    def enterUnaryOpExpr(self, ctx:SASParser.UnaryOpExprContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#unaryOpExpr.
+    def exitUnaryOpExpr(self, ctx:SASParser.UnaryOpExprContext):
         pass
 
 
@@ -206,12 +260,30 @@ class SASParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SASParser#funcCallExpr.
+    def enterFuncCallExpr(self, ctx:SASParser.FuncCallExprContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#funcCallExpr.
+    def exitFuncCallExpr(self, ctx:SASParser.FuncCallExprContext):
+        pass
+
+
     # Enter a parse tree produced by SASParser#idExpr.
     def enterIdExpr(self, ctx:SASParser.IdExprContext):
         pass
 
     # Exit a parse tree produced by SASParser#idExpr.
     def exitIdExpr(self, ctx:SASParser.IdExprContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#literalExpr.
+    def enterLiteralExpr(self, ctx:SASParser.LiteralExprContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#literalExpr.
+    def exitLiteralExpr(self, ctx:SASParser.LiteralExprContext):
         pass
 
 
@@ -239,6 +311,15 @@ class SASParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by SASParser#literal.
     def exitLiteral(self, ctx:SASParser.LiteralContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#returnStatement.
+    def enterReturnStatement(self, ctx:SASParser.ReturnStatementContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#returnStatement.
+    def exitReturnStatement(self, ctx:SASParser.ReturnStatementContext):
         pass
 
 

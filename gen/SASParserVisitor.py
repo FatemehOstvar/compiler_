@@ -1,9 +1,9 @@
-# Generated from D:/pycharm/Parser/SASParser.g4 by ANTLR 4.13.2
+# Generated from D:/pycharm/Parser/parser/SASParser.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
-    from parser.gen.SASParser import SASParser
+    from .SASParser import SASParser
 else:
-    from parser.gen.SASParser import SASParser
+    from SASParser import SASParser
 
 # This class defines a complete generic visitor for a parse tree produced by SASParser.
 
@@ -99,18 +99,48 @@ class SASParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SASParser#mathExpr.
-    def visitMathExpr(self, ctx:SASParser.MathExprContext):
+    # Visit a parse tree produced by SASParser#assignExpr.
+    def visitAssignExpr(self, ctx:SASParser.AssignExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SASParser#literalExpr.
-    def visitLiteralExpr(self, ctx:SASParser.LiteralExprContext):
+    # Visit a parse tree produced by SASParser#logicOrPass.
+    def visitLogicOrPass(self, ctx:SASParser.LogicOrPassContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SASParser#funcCallExpr.
-    def visitFuncCallExpr(self, ctx:SASParser.FuncCallExprContext):
+    # Visit a parse tree produced by SASParser#logicalExpr.
+    def visitLogicalExpr(self, ctx:SASParser.LogicalExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#bitwisePass.
+    def visitBitwisePass(self, ctx:SASParser.BitwisePassContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#bitwiseExpr.
+    def visitBitwiseExpr(self, ctx:SASParser.BitwiseExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#compareExpr.
+    def visitCompareExpr(self, ctx:SASParser.CompareExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#addSub.
+    def visitAddSub(self, ctx:SASParser.AddSubContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#mulDivMod.
+    def visitMulDivMod(self, ctx:SASParser.MulDivModContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#unaryOpExpr.
+    def visitUnaryOpExpr(self, ctx:SASParser.UnaryOpExprContext):
         return self.visitChildren(ctx)
 
 
@@ -119,8 +149,18 @@ class SASParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SASParser#funcCallExpr.
+    def visitFuncCallExpr(self, ctx:SASParser.FuncCallExprContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SASParser#idExpr.
     def visitIdExpr(self, ctx:SASParser.IdExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#literalExpr.
+    def visitLiteralExpr(self, ctx:SASParser.LiteralExprContext):
         return self.visitChildren(ctx)
 
 
@@ -136,6 +176,11 @@ class SASParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SASParser#literal.
     def visitLiteral(self, ctx:SASParser.LiteralContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SASParser#returnStatement.
+    def visitReturnStatement(self, ctx:SASParser.ReturnStatementContext):
         return self.visitChildren(ctx)
 
 

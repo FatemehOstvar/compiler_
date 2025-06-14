@@ -5,13 +5,17 @@ options { tokenVocab = SASLexer; }
 program
     : (preprocessor | statement)* EOF
     ;
+returnStatement
+    : RETURN expr SEMI
+    ;
 
 preprocessor
     : PREPROCESSOR_DIRECTIVE IDENTIFIER
     ;
 
 statement
-    : varDecl
+    : returnStatement
+    | varDecl
     | ifStatement
     | loopStatement
     | funcDecl
@@ -20,7 +24,7 @@ statement
     ;
 
 varDecl
-    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING_K) IDENTIFIER (ASSIGN expr)? SEMICOLON
+    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING) IDENTIFIER (ASSIGN expr)? SEMI
     ;
 
 ifStatement
@@ -57,7 +61,7 @@ funcDecl
     ;
 
 funcHeader
-    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING_K ) IDENTIFIER LPAREN paramList? RPAREN
+    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING ) IDENTIFIER LPAREN paramList? RPAREN
     ;
 
 paramList
@@ -65,7 +69,7 @@ paramList
     ;
 
 param
-    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING_K) IDENTIFIER
+    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING) IDENTIFIER
     ;
 
 classDecl
@@ -77,15 +81,47 @@ classBody
     ;
 
 exprStatement
-    : expr SEMICOLON
+    : { _input.LA(1) != SASLexer.RETURN }? expr SEMI
     ;
 
 expr
-    : expr (PLUS | MINUS | MULT | DIV | MOD) expr    #mathExpr
-    | LPAREN expr RPAREN                             #parenExpr
-    | funcCall                                       #funcCallExpr
-    | IDENTIFIER                                     #idExpr
-    | literal                                        #literalExpr
+    : IDENTIFIER (ASSIGN | ASSIGNMENT_OPERATOR) expr     #assignExpr
+    | logicOrExpr                                         #logicOrPass
+    ;
+
+logicOrExpr
+    : logicAndExpr (LOGICAL_OPERATOR logicAndExpr)*      #logicalExpr
+    ;
+
+logicAndExpr
+    : bitwiseExpr                                         #bitwisePass
+    ;
+
+bitwiseExpr
+    : compareExpr (BITWISE_OPERATOR compareExpr)*
+    ;
+
+compareExpr
+    : additiveExpr ((EQ | NEQ | GT | LT | GEQ | LEQ) additiveExpr)*
+    ;
+
+additiveExpr
+    : multiplicativeExpr ((PLUS | MINUS) multiplicativeExpr)* #addSub
+    ;
+
+multiplicativeExpr
+    : unaryExpr ((MULT | DIV | MOD) unaryExpr)*               #mulDivMod
+    ;
+
+unaryExpr
+    : (MATHEMATICAL_OPERATOR | LOGICAL_OPERATOR | BITWISE_OPERATOR)? primary #unaryOpExpr
+    ;
+
+primary
+    : LPAREN expr RPAREN             #parenExpr
+    | funcCall                       #funcCallExpr
+    | IDENTIFIER                     #idExpr
+    | literal                        #literalExpr
     ;
 
 funcCall
@@ -106,6 +142,7 @@ literal
     | OCTAL_LITERAL
     | SCIENTIFIC_LITERAL
     ;
+
 
 block
     : LBRACE statement* RBRACE
