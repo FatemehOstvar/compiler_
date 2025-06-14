@@ -1,11 +1,17 @@
+import sys
 from antlr4 import *
 from SASLexer import SASLexer
 from SASParser import SASParser
 from SASEvaluator import SASEvaluator
 
 def main():
-    input_code = "int x = 42; int y = 3.14; int z = x + y;"
-    input_stream = InputStream(input_code)
+    if len(sys.argv) < 2:
+        print("Usage: python tester.py <input-file.sas>")
+        return
+
+    filename = sys.argv[1]
+    input_stream = FileStream(filename)
+
     lexer = SASLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
     parser = SASParser(token_stream)

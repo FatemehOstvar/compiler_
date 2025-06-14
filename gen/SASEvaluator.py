@@ -5,21 +5,35 @@ class SASEvaluator(SASParserVisitor):
     def __init__(self):
         self.vars = {}
 
-    def visitVarDecl(self, ctx: SASParser.VarDeclContext):
-        type_name = ctx.getChild(0).getText()
-        var_name = ctx.IDENTIFIER().getText()
+    def visitVarDecl(self, ctx):
+        declared_type = ctx.getChild(0).getText( )  # 'int', 'float', etc.
+        var_name = ctx.IDENTIFIER( ).getText( )
         value = 0
-        if ctx.expr():
-            value = self.visit(ctx.expr())
-        # Truncate float if declared as int
-        if type_name == 'int':
-            value = int(value)
+
+        if ctx.expr( ):
+            value = self.visit(ctx.expr( ))
+
+            # Semantic check: catch type mismatches
+            if declared_type == 'int' and isinstance(value, float):
+                raise TypeError(f"Semantic error: cannot assign float '{value}' to int '{var_name}'")
+            if declared_type == 'char' and not isinstance(value, str):
+                raise TypeError(f"Semantic error: expected char for '{var_name}', got {type(value).__name__}")
+
         self.vars[var_name] = value
         return value
 
-    def visitAssignExpr(self, ctx: SASParser.AssignExprContext):
-        var_name = ctx.IDENTIFIER().getText()
-        value = self.visit(ctx.expr())
+    def visitAssignExpr(self, ctx):
+        var_name = ctx.IDENTIFIER( ).getText( )
+        value = self.visit(ctx.expr( ))
+
+        # Check if variable was declared
+        if var_name in self.types:
+            expected = self.types[var_name]
+            if expected == 'int' and isinstance(value, float):
+                raise TypeError(f"Type error: cannot assign float '{value}' to int '{var_name}'")
+        else:
+            raise NameError(f"Undeclared variable '{var_name}'")
+
         self.vars[var_name] = value
         return value
 
