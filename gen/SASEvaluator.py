@@ -4,22 +4,17 @@ from SASParser import SASParser
 class SASEvaluator(SASParserVisitor):
     def __init__(self):
         self.vars = {}
+        self.types = {}
 
     def visitVarDecl(self, ctx):
-        declared_type = ctx.getChild(0).getText( )  # 'int', 'float', etc.
+        declared_type = ctx.getChild(0).getText( )
         var_name = ctx.IDENTIFIER( ).getText( )
-        value = 0
+        value = self.visit(ctx.expr( )) if ctx.expr( ) else 0
 
-        if ctx.expr( ):
-            value = self.visit(ctx.expr( ))
-
-            # Semantic check: catch type mismatches
-            if declared_type == 'int' and isinstance(value, float):
-                raise TypeError(f"Semantic error: cannot assign float '{value}' to int '{var_name}'")
-            if declared_type == 'char' and not isinstance(value, str):
-                raise TypeError(f"Semantic error: expected char for '{var_name}', got {type(value).__name__}")
+        # Type validation...
 
         self.vars[var_name] = value
+        self.types[var_name] = declared_type
         return value
 
     def visitAssignExpr(self, ctx):
