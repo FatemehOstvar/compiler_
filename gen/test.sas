@@ -15,6 +15,15 @@ else if (x <= 0)  {
 else {
 y = 1;
 }
+int i = 0;
+for (i = 0; i < 3; i = i + 1) {
+    z = z + 1;
+}
+
+int count = 0;
+while (count < 5) {
+    count = count + 1;
+}
 
 /*class Foo {
     int bar(int z) {

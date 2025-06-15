@@ -237,6 +237,31 @@ class SASEvaluator(SASParserVisitor):
                 print(f"[exec] Result at LINE {line}: {result} ({type(result).__name__})")
         self.in_conditional_block = False
 
+    def visitWhileLoop(self, ctx):
+        line = ctx.start.line
+        print(f"└─[LINE {line}] WHILE")
+        print(f"│   └─ condition:   {ctx.expr().getText()}")
+        self.in_conditional_block = True
+        while self.visit(ctx.expr()):
+            for stmt in ctx.block().statement():
+                result = self.visit(stmt)
+                if result is not None:
+                    print(f"[exec] Result at LINE {stmt.start.line}: {result} ({type(result).__name__})")
+        self.in_conditional_block = False
+
+    def visitForLoop(self, ctx):
+        line = ctx.start.line
+        print(f"└─[LINE {line}] FOR")
+        self.visit(ctx.exprStatement(0))  # init
+        self.in_conditional_block = True
+        while self.visit(ctx.exprStatement(1)):
+            for stmt in ctx.block().statement():
+                result = self.visit(stmt)
+                if result is not None:
+                    print(f"[exec] Result at LINE {stmt.start.line}: {result} ({type(result).__name__})")
+            self.visit(ctx.expr())  # increment
+        self.in_conditional_block = False
+
     def visitBlock(self, ctx):
         for stmt in ctx.statement():
             self.visit(stmt)
