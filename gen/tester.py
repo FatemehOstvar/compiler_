@@ -26,7 +26,6 @@ def main():
 
     for var, val in evaluator.vars.items( ):
         vartype = evaluator.types.get(var, type(val).__name__)
-        print(f"{var} = {val}    ({vartype})")
 
 
 if __name__ == "__main__":

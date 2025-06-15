@@ -5,11 +5,18 @@ bool ok = false;
 char v = 's';
 float n = 4.2;
 double k = 3.7098786;
-int a = 2 + 4;
 int z = x + y;
-/*if (x > 0) {
+if (x > 0) {
     y = y + 1;
-}class Foo {
+}
+else if (x <= 0)  {
+    y = y - 1;
+}
+else {
+y = 1;
+}
+
+/*class Foo {
     int bar(int z) {
         return z * 2;
     }
