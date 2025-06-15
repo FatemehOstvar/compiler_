@@ -163,6 +163,27 @@ class SASEvaluator(SASParserVisitor):
             raise SemanticError(f"Invalid char literal: {t}", ctx.start.line)
         return stripped
 
+    def visitFuncDecl(self, ctx):
+        header = ctx.funcHeader()
+        return_type = header.getChild(0).getText()
+        name = header.IDENTIFIER().getText()
+        params = header.paramList()
+
+        print(f"└─[LINE {ctx.start.line}] FUNCTION")
+        print(f"│   ├─ name:     {name}")
+        print(f"│   ├─ returns:  {return_type}")
+
+        if params:
+            print("│   └─ params:")
+            for param in params.param():
+                ptype = param.getChild(0).getText()
+                pname = param.getChild(1).getText()
+                print(f"│       ├─ {pname}: {ptype}")
+        else:
+            print("│   └─ params:   (none)")
+
+        self.visit(ctx.block())
+
     def visitIfStatement(self, ctx):
         matched = self._handle_branch(ctx.ifBlock(), "IF")
 

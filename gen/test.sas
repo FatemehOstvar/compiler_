@@ -24,6 +24,9 @@ int count = 0;
 while (count < 5) {
     count = count + 1;
 }
+int add(int a, int b) {
+    return a + b;
+}
 
 /*class Foo {
     int bar(int z) {
