@@ -81,7 +81,7 @@ classBody
     ;
 
 exprStatement
-    : { _input.LA(1) != SASLexer.RETURN }? expr SEMI
+    : { self._input.LA(1) != SASLexer.RETURN }? expr SEMI
     ;
 
 expr
@@ -141,6 +141,8 @@ literal
     | BINARY_LITERAL
     | OCTAL_LITERAL
     | SCIENTIFIC_LITERAL
+    | TRUE
+    | FALSE
     ;
 
 

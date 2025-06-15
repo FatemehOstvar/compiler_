@@ -1,10 +1,13 @@
 lexer grammar SASLexer;
 
+
+TRUE  : 'true';
+FALSE : 'false';
+BOOL  : 'bool';
 INT : 'int';
 FLOAT : 'float';
 DOUBLE : 'double';
 CHAR : 'char';
-BOOL : 'bool';
 STRING : 'string';
 IF : 'if';
 ELSE : 'else';

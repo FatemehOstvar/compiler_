@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82d0fb9b-cd44-49ce-b174-1a576855dbc8" name="Changes" comment="computes Summation">
-      <change afterPath="$PROJECT_DIR$/gen/semantics.py" afterDir="false" />
+    <list default="true" id="82d0fb9b-cd44-49ce-b174-1a576855dbc8" name="Changes" comment=" type indication">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_8_2025_8_36_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_8_2025_8_36_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SASLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/SASLexer.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SASParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/SASParser.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASEvaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASEvaluator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASLexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASLexer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASParser.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParser.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASParser.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParser.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASParserListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParserListener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/SASParserVisitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParserVisitor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/test.sas" beforeDir="false" afterPath="$PROJECT_DIR$/gen/test.sas" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/tester.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,18 +47,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/pycharm/Lexer/SASLexer.g4",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/pycharm/Lexer/SASLexer.g4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\pycharm\Parser\parser\gen" />
@@ -60,7 +74,9 @@
       <option name="presentableId" value="Default" />
       <updated>1749358561963</updated>
       <workItem from="1749358563036" duration="5720000" />
-      <workItem from="1749911629510" duration="10599000" />
+      <workItem from="1749911629510" duration="10957000" />
+      <workItem from="1749925321230" duration="379000" />
+      <workItem from="1749964041337" duration="3486000" />
     </task>
     <task id="LOCAL-00001" summary="lexer completed">
       <option name="closed" value="true" />
@@ -94,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749924211110</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=" type indication">
+      <option name="closed" value="true" />
+      <created>1749925214263</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749925214263</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +150,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="lexer completed" />
     <MESSAGE value="computes Summation" />
-    <option name="LAST_COMMIT_MESSAGE" value="computes Summation" />
+    <MESSAGE value=" type indication" />
+    <option name="LAST_COMMIT_MESSAGE" value=" type indication" />
   </component>
 </project>

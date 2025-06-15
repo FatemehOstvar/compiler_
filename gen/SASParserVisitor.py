@@ -14,6 +14,11 @@ class SASParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SASParser#returnStatement.
+    def visitReturnStatement(self, ctx:SASParser.ReturnStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SASParser#preprocessor.
     def visitPreprocessor(self, ctx:SASParser.PreprocessorContext):
         return self.visitChildren(ctx)
@@ -176,11 +181,6 @@ class SASParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SASParser#literal.
     def visitLiteral(self, ctx:SASParser.LiteralContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by SASParser#returnStatement.
-    def visitReturnStatement(self, ctx:SASParser.ReturnStatementContext):
         return self.visitChildren(ctx)
 
 

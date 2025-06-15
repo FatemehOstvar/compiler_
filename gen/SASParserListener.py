@@ -17,6 +17,15 @@ class SASParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SASParser#returnStatement.
+    def enterReturnStatement(self, ctx:SASParser.ReturnStatementContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#returnStatement.
+    def exitReturnStatement(self, ctx:SASParser.ReturnStatementContext):
+        pass
+
+
     # Enter a parse tree produced by SASParser#preprocessor.
     def enterPreprocessor(self, ctx:SASParser.PreprocessorContext):
         pass
@@ -311,15 +320,6 @@ class SASParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by SASParser#literal.
     def exitLiteral(self, ctx:SASParser.LiteralContext):
-        pass
-
-
-    # Enter a parse tree produced by SASParser#returnStatement.
-    def enterReturnStatement(self, ctx:SASParser.ReturnStatementContext):
-        pass
-
-    # Exit a parse tree produced by SASParser#returnStatement.
-    def exitReturnStatement(self, ctx:SASParser.ReturnStatementContext):
         pass
 
 

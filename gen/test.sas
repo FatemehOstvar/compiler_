@@ -1,7 +1,10 @@
-
 int x = 42;
+string r = "rr";
 int y = 3;
-float u = 3;
+bool ok = false;
+char v = 's';
+float n = 4.2;
+double k = 3.7098786;
 int a = 2 + 4;
 int z = x + y;
 /*if (x > 0) {
@@ -10,6 +13,6 @@ int z = x + y;
     int bar(int z) {
         return z * 2;
     }
-}*/
+}double, char and bool arent handles as well.float u = 3;*/
 
 

@@ -1,5 +1,8 @@
 from SASParserVisitor import SASParserVisitor
 from SASParser import SASParser
+from SASLexer import SASLexer
+from semantics import TypeMismatchError, SemanticError
+
 
 class SASEvaluator(SASParserVisitor):
     def __init__(self):
@@ -9,9 +12,19 @@ class SASEvaluator(SASParserVisitor):
     def visitVarDecl(self, ctx):
         declared_type = ctx.getChild(0).getText( )
         var_name = ctx.IDENTIFIER( ).getText( )
-        value = self.visit(ctx.expr( )) if ctx.expr( ) else 0
+        value = self.visit(ctx.expr( )) if ctx.expr( ) else None
 
-        # Type validation...
+        # semantic type checks
+        if declared_type == 'int' and not isinstance(value, int):
+            raise TypeMismatchError('int', type(value).__name__, var_name, ctx.start.line)
+        if declared_type == 'float' and not isinstance(value, float):
+            raise TypeMismatchError('float', type(value).__name__, var_name, ctx.start.line)
+        if declared_type == 'string' and not isinstance(value, str):
+            raise TypeMismatchError('string', type(value).__name__, var_name, ctx.start.line)
+        if declared_type == 'char' and (not isinstance(value, str) or len(value) != 1):
+            raise TypeMismatchError('char', type(value).__name__, var_name, ctx.start.line)
+        if declared_type == 'bool' and not isinstance(value, bool):
+            raise TypeMismatchError('bool', type(value).__name__, var_name, ctx.start.line)
 
         self.vars[var_name] = value
         self.types[var_name] = declared_type
@@ -59,9 +72,28 @@ class SASEvaluator(SASParserVisitor):
 
     def visitLiteralExpr(self, ctx):
         text = ctx.getText( )
-        if '.' in text or 'e' in text.lower( ):
+        token_type = ctx.start.type
+
+        if token_type == SASLexer.TRUE:
+            return True
+        elif token_type == SASLexer.FALSE:
+            return False
+        elif token_type == SASLexer.STRING_LITERAL:
+            return text.strip('"')
+        elif token_type == SASLexer.CHAR_LITERAL:
+            return text.strip("'")
+        elif token_type == SASLexer.FLOAT_LITERAL or token_type == SASLexer.SCIENTIFIC_LITERAL:
             return float(text)
-        return int(text)
+        elif token_type == SASLexer.INTEGER_LITERAL:
+            return int(text)
+        elif token_type == SASLexer.HEX_LITERAL:
+            return int(text, 16)
+        elif token_type == SASLexer.BINARY_LITERAL:
+            return int(text, 2)
+        elif token_type == SASLexer.OCTAL_LITERAL:
+            return int(text, 8)
+        else:
+            raise SemanticError(f"Unsupported literal: {text}", ctx.start.line)
 
     def visitExprStatement(self, ctx: SASParser.ExprStatementContext):
         return self.visit(ctx.expr())
