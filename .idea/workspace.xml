@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="82d0fb9b-cd44-49ce-b174-1a576855dbc8" name="Changes" comment="Added Function calls">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SASParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/SASParser.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/SASEvaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASEvaluator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/SASParser.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParser.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/SASParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/SASParserListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParserListener.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/SASParserVisitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASParserVisitor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/test.sas" beforeDir="false" afterPath="$PROJECT_DIR$/gen/test.sas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

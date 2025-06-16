@@ -96,10 +96,12 @@ class SASEvaluator(SASParserVisitor):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
         left = self.visit(ctx.getChild(0))
-        op = ctx.getChild(1).getText()
+        op_token = ctx.getChild(1).symbol.type
         right = self.visit(ctx.getChild(2))
-        return left + right if op == '+' else left - right
-
+        if op_token == SASLexer.PLUS:
+            return left + right
+        elif op_token == SASLexer.MINUS:
+            return left - right
     def visitMulDivMod(self, ctx):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
@@ -215,10 +217,13 @@ class SASEvaluator(SASParserVisitor):
     def visitIfStatement(self, ctx):
         matched = self._handle_branch(ctx.ifBlock(), "IF")
 
-        for elif_ctx in ctx.elseIfBlock():
-            _ = self._handle_branch(elif_ctx, "ELSE IF") if not matched else self._print_branch_info_only(elif_ctx, "ELSE IF")
+        for elif_ctx in ctx.elseIfBlock( ):
+            if not matched:
+                matched = self._handle_branch(elif_ctx, "ELSE IF")
+            else:
+                self._print_branch_info_only(elif_ctx, "ELSE IF")
 
-        if ctx.elseBlock():
+        if ctx.elseBlock() :
             self._handle_else(ctx.elseBlock(), matched)
 
     def _handle_branch(self, branch_ctx, label):
@@ -233,13 +238,14 @@ class SASEvaluator(SASParserVisitor):
             return True
         return False
 
-    def _print_branch_info_only(self, branch_ctx, label):
+    def _print_branch_info_only(self, branch_ctx, label) -> bool:
         line = self._get_branch_line(branch_ctx)
         expr_text = self._get_expr_text(branch_ctx)
         print(f"│\n└─[LINE {line}] {label}")
         print(f"│   ├─ condition:   {expr_text}")
         print(f"│   ├─ result:      False")
         print(f"│   └─ type:        conditional")
+        return True
 
     def _get_branch_line(self, branch_ctx):
         return branch_ctx.start.line
@@ -274,7 +280,7 @@ class SASEvaluator(SASParserVisitor):
         line = else_ctx.start.line
         print(f"│\n└─[LINE {line}] ELSE")
         print(f"│   └─ type:        conditional")
-        if not was_matched:
+        if  not was_matched:
             self._execute_conditional_block(else_ctx.block())
 
     def _execute_conditional_block(self, block_ctx):
