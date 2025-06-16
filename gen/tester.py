@@ -1,7 +1,4 @@
 
-# TODO handle if else else if statements by printing its type!
-# TODO handle while and for loops by printing its type!
-
 import sys
 from antlr4 import *
 from SASLexer import SASLexer

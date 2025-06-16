@@ -1,0 +1,177 @@
+│
+└─[LINE 1] VAR
+│   ├─ name       x
+│   ├─ value      9
+│   └─ type       int
+│
+└─[LINE 2] VAR
+│   ├─ name       r
+│   ├─ value      rr
+│   └─ type       string
+│
+└─[LINE 3] VAR
+│   ├─ name       y
+│   ├─ value      3
+│   └─ type       int
+│
+└─[LINE 4] VAR
+│   ├─ name       ok
+│   ├─ value      False
+│   └─ type       bool
+│
+└─[LINE 5] VAR
+│   ├─ name       v
+│   ├─ value      s
+│   └─ type       char
+│
+└─[LINE 6] VAR
+│   ├─ name       n
+│   ├─ value      4.2
+│   └─ type       float
+│
+└─[LINE 7] VAR
+│   ├─ name       k
+│   ├─ value      3.7098786
+│   └─ type       double
+│
+└─[LINE 8] VAR
+│   ├─ name       z
+│   ├─ value      12
+│   └─ type       int
+│
+└─[LINE 9] COMPARE
+│   ├─ left       9
+│   ├─ operator   >
+│   └─ right      0
+│
+└─[LINE 9] IF
+│   ├─ condition  x>0
+│   ├─ result     True
+│   └─ type       conditional
+│
+└─[LINE 10] EXEC
+│   ├─ statement  y=y+1;
+│   ├─ result     4
+│   └─ type       int
+│
+└─[LINE 12] ELSE IF
+│   ├─ condition  x<0
+│   ├─ result     False
+│   └─ type       conditional
+│
+└─[LINE 15] ELSE
+│   └─ type       conditional
+│
+└─[LINE 18] VAR
+│   ├─ name       i
+│   ├─ value      0
+│   └─ type       int
+│
+└─[LINE 19] FOR
+│
+└─[LINE 19] COMPARE
+│   ├─ left       0
+│   ├─ operator   <
+│   └─ right      3
+│
+└─[LINE 20] EXEC
+│   ├─ statement  z=z+1;
+│   ├─ result     13
+│   └─ type       int
+│
+└─[LINE 19] COMPARE
+│   ├─ left       1
+│   ├─ operator   <
+│   └─ right      3
+│
+└─[LINE 20] EXEC
+│   ├─ statement  z=z+1;
+│   ├─ result     14
+│   └─ type       int
+│
+└─[LINE 19] COMPARE
+│   ├─ left       2
+│   ├─ operator   <
+│   └─ right      3
+│
+└─[LINE 20] EXEC
+│   ├─ statement  z=z+1;
+│   ├─ result     15
+│   └─ type       int
+│
+└─[LINE 19] COMPARE
+│   ├─ left       3
+│   ├─ operator   <
+│   └─ right      3
+│
+└─[LINE 23] VAR
+│   ├─ name       count
+│   ├─ value      0
+│   └─ type       int
+│
+└─[LINE 24] WHILE
+│   └─ condition  count<5
+│
+└─[LINE 24] COMPARE
+│   ├─ left       0
+│   ├─ operator   <
+│   └─ right      5
+│
+└─[LINE 25] EXEC
+│   ├─ statement  count=count+1;
+│   ├─ result     1
+│   └─ type       int
+│
+└─[LINE 24] COMPARE
+│   ├─ left       1
+│   ├─ operator   <
+│   └─ right      5
+│
+└─[LINE 25] EXEC
+│   ├─ statement  count=count+1;
+│   ├─ result     2
+│   └─ type       int
+│
+└─[LINE 24] COMPARE
+│   ├─ left       2
+│   ├─ operator   <
+│   └─ right      5
+│
+└─[LINE 25] EXEC
+│   ├─ statement  count=count+1;
+│   ├─ result     3
+│   └─ type       int
+│
+└─[LINE 24] COMPARE
+│   ├─ left       3
+│   ├─ operator   <
+│   └─ right      5
+│
+└─[LINE 25] EXEC
+│   ├─ statement  count=count+1;
+│   ├─ result     4
+│   └─ type       int
+│
+└─[LINE 24] COMPARE
+│   ├─ left       4
+│   ├─ operator   <
+│   └─ right      5
+│
+└─[LINE 25] EXEC
+│   ├─ statement  count=count+1;
+│   ├─ result     5
+│   └─ type       int
+│
+└─[LINE 24] COMPARE
+│   ├─ left       5
+│   ├─ operator   <
+│   └─ right      5
+│
+└─[LINE 27] FUNCTION
+│   ├─ name       square
+│   └─ returns    int
+│   └─ params:
+│       ├─ n: int
+│
+└─[LINE 30] CALL
+│   └─ expression square(9)

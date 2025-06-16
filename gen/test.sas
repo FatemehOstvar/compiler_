@@ -27,9 +27,7 @@ while (count < 5) {
 int square(int n) {
     n = n * n;
 }
-
-int x = 5;
-square(x);
+square('e');
 
 
 /*class Foo {

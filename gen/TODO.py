@@ -1,7 +1,6 @@
 
-# TODO add support for function calls
 # TODO  add support for Classes printing their name
-# TODO  add support for درصورت مشاهده فراخوانی تابع باید نام تایع به همراه آرگومان های ارسالی به عنوان پارامتر چاپ شود.
+# TODO  type of function
 # TODO  add support for  . جلوگیری از تعریف کلاس یا فانکشن با نام مشابه در یک اسکوپ غیر قانونی
 #2 . جلوگیری از تعریف متغییر با نام مشابه در یک اسکوپ غیر قانونی TODO
 # TODO 3 . نشان دادن خطای آرگومان اشتباه هنگام پاس دادن مقادیر اشتباه در زمان فراخوانی توابع
