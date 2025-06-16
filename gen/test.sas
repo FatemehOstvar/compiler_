@@ -24,9 +24,13 @@ int count = 0;
 while (count < 5) {
     count = count + 1;
 }
-int add(int a, int b) {
-    return a + b;
+int square(int n) {
+    n = n * n;
 }
+
+int x = 5;
+square(x);
+
 
 /*class Foo {
     int bar(int z) {

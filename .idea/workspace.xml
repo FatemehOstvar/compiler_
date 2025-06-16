@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82d0fb9b-cd44-49ce-b174-1a576855dbc8" name="Changes" comment="Added full support: while, for">
+    <list default="true" id="82d0fb9b-cd44-49ce-b174-1a576855dbc8" name="Changes" comment="Added partial support: Functions">
+      <change afterPath="$PROJECT_DIR$/gen/TODO.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/SASEvaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen/SASEvaluator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/test.sas" beforeDir="false" afterPath="$PROJECT_DIR$/gen/test.sas" afterDir="false" />
@@ -63,7 +64,8 @@
       <workItem from="1749358563036" duration="5720000" />
       <workItem from="1749911629510" duration="10957000" />
       <workItem from="1749925321230" duration="379000" />
-      <workItem from="1749964041337" duration="18767000" />
+      <workItem from="1749964041337" duration="19742000" />
+      <workItem from="1750042292033" duration="4589000" />
     </task>
     <task id="LOCAL-00001" summary="lexer completed">
       <option name="closed" value="true" />
@@ -129,7 +131,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749984170284</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added partial support: Functions">
+      <option name="closed" value="true" />
+      <created>1749988105105</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1749988105105</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +175,8 @@
     <MESSAGE value="Add full support for all base types: int, float, double, char, bool, and string." />
     <MESSAGE value="Added full support: if, else if, else" />
     <MESSAGE value="Added full support: while, for" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added full support: while, for" />
+    <MESSAGE value="Added partial support: Functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added partial support: Functions" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/parser$SASEvaluator.coverage" NAME="SASEvaluator Coverage Results" MODIFIED="1749978618117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gen" />

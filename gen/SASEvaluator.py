@@ -3,13 +3,13 @@ from SASParser import SASParser
 from SASLexer import SASLexer
 from semantics import TypeMismatchError, SemanticError, UnsupportedOperationError
 
-
 class SASEvaluator(SASParserVisitor):
     def __init__(self):
         self.vars = {}
         self.types = {}
         self.decl_lines = {}
         self.in_conditional_block = False
+        self.functions = {}
 
     def visitVarDecl(self, ctx):
         declared_type = self._extract_declared_type(ctx)
@@ -55,7 +55,7 @@ class SASEvaluator(SASParserVisitor):
             raise TypeMismatchError(declared_type, type(value).__name__, var_name, line)
 
     def _print_var_info(self, line, var_name, value, actual_type):
-        print(f"└─[LINE {line}] VAR")
+        print(f"│\n└─[LINE {line}] VAR")
         print(f"│   ├─ name:     {var_name}")
         print(f"│   ├─ value:    {value}")
         print(f"│   └─ type:     {actual_type}")
@@ -110,7 +110,7 @@ class SASEvaluator(SASParserVisitor):
         op_token = op_node.symbol.type
         op_text = op_node.getText()
 
-        print(f"└─[COMPARE] {left} {op_text} {right}")
+        print(f"│\n└─[COMPARE] {left} {op_text} {right}")
 
         return self._evaluate_comparison(op_token, op_text, left, right, ctx)
 
@@ -132,6 +132,16 @@ class SASEvaluator(SASParserVisitor):
     def visitIdExpr(self, ctx: SASParser.IdExprContext):
         name = ctx.IDENTIFIER().getText()
         return self.vars.get(name, 0)
+
+    def visitFuncCallExpr(self, ctx: SASParser.FuncCallExprContext):
+        func_name = ctx.funcCall().IDENTIFIER().getText()
+        args = [self.visit(arg) for arg in ctx.funcCall().argList().expr()] if ctx.funcCall().argList() else []
+        line = ctx.start.line
+        arg_str = ", ".join(f"{repr(a)}" for a in args)
+        print(f"│\n└─[LINE {line}] CALL")
+        print(f"│   └─ {func_name}({arg_str})")
+        return None
+
 
     def visitLiteralExpr(self, ctx):
         text = ctx.getText()
@@ -169,7 +179,7 @@ class SASEvaluator(SASParserVisitor):
         name = header.IDENTIFIER().getText()
         params = header.paramList()
 
-        print(f"└─[LINE {ctx.start.line}] FUNCTION")
+        print(f"│\n└─[LINE {ctx.start.line}] FUNCTION")
         print(f"│   ├─ name:     {name}")
         print(f"│   ├─ returns:  {return_type}")
 
@@ -208,7 +218,7 @@ class SASEvaluator(SASParserVisitor):
     def _print_branch_info_only(self, branch_ctx, label):
         line = self._get_branch_line(branch_ctx)
         expr_text = self._get_expr_text(branch_ctx)
-        print(f"└─[LINE {line}] {label}")
+        print(f"│\n└─[LINE {line}] {label}")
         print(f"│   ├─ condition:   {expr_text}")
         print(f"│   ├─ result:      False")
         print(f"│   └─ type:        conditional")
@@ -233,7 +243,7 @@ class SASEvaluator(SASParserVisitor):
         return self.visit(branch_ctx.expr())
 
     def _print_condition_info(self, line, label, expr_text, result, result_type):
-        print(f"└─[LINE {line}] {label}")
+        print(f"│\n└─[LINE {line}] {label}")
         print(f"│   ├─ condition:   {expr_text}")
         print(f"│   ├─ result:      {result}")
         print(f"│   └─ type:        {result_type}")
@@ -244,7 +254,7 @@ class SASEvaluator(SASParserVisitor):
 
     def _handle_else(self, else_ctx, was_matched):
         line = else_ctx.start.line
-        print(f"└─[LINE {line}] ELSE")
+        print(f"│\n└─[LINE {line}] ELSE")
         print(f"│   └─ type:        conditional")
         if not was_matched:
             self._execute_conditional_block(else_ctx.block())
@@ -260,7 +270,7 @@ class SASEvaluator(SASParserVisitor):
 
     def visitWhileLoop(self, ctx):
         line = ctx.start.line
-        print(f"└─[LINE {line}] WHILE")
+        print(f"│\n└─[LINE {line}] WHILE")
         print(f"│   └─ condition:   {ctx.expr().getText()}")
         self.in_conditional_block = True
         while self.visit(ctx.expr()):
@@ -272,7 +282,7 @@ class SASEvaluator(SASParserVisitor):
 
     def visitForLoop(self, ctx):
         line = ctx.start.line
-        print(f"└─[LINE {line}] FOR")
+        print(f"│\n└─[LINE {line}] FOR")
         self.visit(ctx.exprStatement(0))  # init
         self.in_conditional_block = True
         while self.visit(ctx.exprStatement(1)):
