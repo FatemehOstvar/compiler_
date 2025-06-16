@@ -54,6 +54,24 @@ class SASEvaluator(SASParserVisitor):
         if check and not check(value):
             raise TypeMismatchError(declared_type, type(value).__name__, var_name, line)
 
+    def visitUnaryOpExpr(self, ctx: SASParser.UnaryOpExprContext):
+        if ctx.getChildCount() == 1:
+            return self.visit(ctx.getChild(0))
+
+        op_token = ctx.getChild(0).getSymbol().type
+        value = self.visit(ctx.getChild(1))
+
+        if op_token == SASLexer.MINUS:
+            return -value
+        elif op_token == SASLexer.PLUS:
+            return +value
+        elif op_token == SASLexer.LOGICAL_OPERATOR and ctx.getChild(0).getText() == '!':
+            return not value
+        elif op_token == SASLexer.BITWISE_OPERATOR and ctx.getChild(0).getText() == '~':
+            return ~value
+        else:
+            raise SemanticError(f"Line {ctx.start.line}: Unsupported unary operator: {ctx.getChild(0).getText()}", ctx.start.line)
+
     def _print_var_info(self, line, var_name, value, actual_type):
         print(f"│\n└─[LINE {line}] VAR")
         print(f"│   ├─ name:     {var_name}")
@@ -134,14 +152,14 @@ class SASEvaluator(SASParserVisitor):
         return self.vars.get(name, 0)
 
     def visitFuncCallExpr(self, ctx: SASParser.FuncCallExprContext):
-        func_name = ctx.funcCall().IDENTIFIER().getText()
-        args = [self.visit(arg) for arg in ctx.funcCall().argList().expr()] if ctx.funcCall().argList() else []
-        line = ctx.start.line
+        func_call = ctx.funcCall()
+        func_name = func_call.IDENTIFIER().getText()
+        args = [self.visit(arg) for arg in func_call.argList().expr()] if func_call.argList() else []
         arg_str = ", ".join(f"{repr(a)}" for a in args)
-        print(f"│\n└─[LINE {line}] CALL")
+        line = ctx.start.line
+        print(f"└─[LINE {line}] CALL")
         print(f"│   └─ {func_name}({arg_str})")
         return None
-
 
     def visitLiteralExpr(self, ctx):
         text = ctx.getText()

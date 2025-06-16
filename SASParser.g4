@@ -114,8 +114,10 @@ multiplicativeExpr
     ;
 
 unaryExpr
-    : (MATHEMATICAL_OPERATOR | LOGICAL_OPERATOR | BITWISE_OPERATOR)? primary #unaryOpExpr
+    : (PLUS | MINUS | LOGICAL_OPERATOR | BITWISE_OPERATOR)? primary #unaryOpExpr
+    | primary                                                      #noUnary
     ;
+
 
 primary
     : LPAREN expr RPAREN             #parenExpr

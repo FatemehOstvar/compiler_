@@ -1,4 +1,4 @@
-int x = 42;
+int x = -4;
 string r = "rr";
 int y = 3;
 bool ok = false;
@@ -9,7 +9,7 @@ int z = x + y;
 if (x > 0) {
     y = y + 1;
 }
-else if (x <= 0)  {
+else if (x < 0)  {
     y = y - 1;
 }
 else {

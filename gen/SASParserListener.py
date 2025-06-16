@@ -260,6 +260,15 @@ class SASParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SASParser#noUnary.
+    def enterNoUnary(self, ctx:SASParser.NoUnaryContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#noUnary.
+    def exitNoUnary(self, ctx:SASParser.NoUnaryContext):
+        pass
+
+
     # Enter a parse tree produced by SASParser#parenExpr.
     def enterParenExpr(self, ctx:SASParser.ParenExprContext):
         pass

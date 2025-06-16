@@ -149,6 +149,11 @@ class SASParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SASParser#noUnary.
+    def visitNoUnary(self, ctx:SASParser.NoUnaryContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SASParser#parenExpr.
     def visitParenExpr(self, ctx:SASParser.ParenExprContext):
         return self.visitChildren(ctx)
