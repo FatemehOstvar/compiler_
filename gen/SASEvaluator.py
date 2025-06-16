@@ -11,6 +11,15 @@ class SASEvaluator(SASParserVisitor):
         self.in_conditional_block = False
         self.functions = {}
 
+        self.output_lines = []
+
+    def _log(self, line):
+        self.output_lines.append(line)
+        print(line)
+
+    def write_output(self, filename="output.txt"):
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write("\n".join(self.output_lines))
     def visitVarDecl(self, ctx):
         declared_type = self._extract_declared_type(ctx)
         var_name = self._extract_var_name(ctx)
@@ -73,11 +82,10 @@ class SASEvaluator(SASParserVisitor):
             raise SemanticError(f"Line {ctx.start.line}: Unsupported unary operator: {ctx.getChild(0).getText()}", ctx.start.line)
 
     def _print_var_info(self, line, var_name, value, actual_type):
-        print(f"│\n└─[LINE {line}] VAR")
-        print(f"│   ├─ name:     {var_name}")
-        print(f"│   ├─ value:    {value}")
-        print(f"│   └─ type:     {actual_type}")
-
+        self._log(f"│\n└─[LINE {line}] VAR")
+        self._log(f"│   ├─ name:     {var_name}")
+        self._log(f"│   ├─ value:    {value}")
+        self._log(f"│   └─ type:     {actual_type}")
     def visitAssignExpr(self, ctx):
         var_name = ctx.IDENTIFIER().getText()
         value = self.visit(ctx.expr())
@@ -130,7 +138,7 @@ class SASEvaluator(SASParserVisitor):
         op_token = op_node.symbol.type
         op_text = op_node.getText()
 
-        print(f"│\n└─[COMPARE] {left} {op_text} {right}")
+        self._log(f"│\n└─[COMPARE] {left} {op_text} {right}")
 
         return self._evaluate_comparison(op_token, op_text, left, right, ctx)
 
@@ -159,8 +167,8 @@ class SASEvaluator(SASParserVisitor):
         args = [self.visit(arg) for arg in func_call.argList().expr()] if func_call.argList() else []
         arg_str = ", ".join(f"{repr(a)}" for a in args)
         line = ctx.start.line
-        print(f"└─[LINE {line}] CALL")
-        print(f"│   └─ {func_name}({arg_str})")
+        self._log(f"└─[LINE {line}] CALL")
+        self._log(f"│   └─ {func_name}({arg_str})")
         return None
 
     def visitLiteralExpr(self, ctx):
@@ -199,18 +207,18 @@ class SASEvaluator(SASParserVisitor):
         name = header.IDENTIFIER().getText()
         params = header.paramList()
 
-        print(f"│\n└─[LINE {ctx.start.line}] FUNCTION")
-        print(f"│   ├─ name:     {name}")
-        print(f"│   ├─ returns:  {return_type}")
+        self._log(f"│\n└─[LINE {ctx.start.line}] FUNCTION")
+        self._log(f"│   ├─ name:     {name}")
+        self._log(f"│   ├─ returns:  {return_type}")
 
         if params:
-            print("│   └─ params:")
+            self._log("│   └─ params:")
             for param in params.param():
                 ptype = param.getChild(0).getText()
                 pname = param.getChild(1).getText()
-                print(f"│       ├─ {pname}: {ptype}")
+                self._log(f"│       ├─ {pname}: {ptype}")
         else:
-            print("│   └─ params:   (none)")
+            self._log("│   └─ params:   (none)")
 
         self.visit(ctx.block())
 
@@ -241,10 +249,10 @@ class SASEvaluator(SASParserVisitor):
     def _print_branch_info_only(self, branch_ctx, label) -> bool:
         line = self._get_branch_line(branch_ctx)
         expr_text = self._get_expr_text(branch_ctx)
-        print(f"│\n└─[LINE {line}] {label}")
-        print(f"│   ├─ condition:   {expr_text}")
-        print(f"│   ├─ result:      False")
-        print(f"│   └─ type:        conditional")
+        self._log(f"│\n└─[LINE {line}] {label}")
+        self._log(f"│   ├─ condition:   {expr_text}")
+        self._log(f"│   ├─ result:      False")
+        self._log(f"│   └─ type:        conditional")
         return True
 
     def _get_branch_line(self, branch_ctx):
@@ -267,10 +275,10 @@ class SASEvaluator(SASParserVisitor):
         return self.visit(branch_ctx.expr())
 
     def _print_condition_info(self, line, label, expr_text, result, result_type):
-        print(f"│\n└─[LINE {line}] {label}")
-        print(f"│   ├─ condition:   {expr_text}")
-        print(f"│   ├─ result:      {result}")
-        print(f"│   └─ type:        {result_type}")
+        self._log(f"│\n└─[LINE {line}] {label}")
+        self._log(f"│   ├─ condition:   {expr_text}")
+        self._log(f"│   ├─ result:      {result}")
+        self._log(f"│   └─ type:        {result_type}")
 
     def _validate_condition_type(self, value, value_type, label, line):
         if not isinstance(value, bool):
@@ -278,8 +286,8 @@ class SASEvaluator(SASParserVisitor):
 
     def _handle_else(self, else_ctx, was_matched):
         line = else_ctx.start.line
-        print(f"│\n└─[LINE {line}] ELSE")
-        print(f"│   └─ type:        conditional")
+        self._log(f"│\n└─[LINE {line}] ELSE")
+        self._log(f"│   └─ type:        conditional")
         if  not was_matched:
             self._execute_conditional_block(else_ctx.block())
 
@@ -289,31 +297,31 @@ class SASEvaluator(SASParserVisitor):
             result = self.visit(stmt)
             if result is not None:
                 line = stmt.start.line
-                print(f"[exec] Result at LINE {line}: {result} ({type(result).__name__})")
+                self._log(f"[exec] Result at LINE {line}: {result} ({type(result).__name__})")
         self.in_conditional_block = False
 
     def visitWhileLoop(self, ctx):
         line = ctx.start.line
-        print(f"│\n└─[LINE {line}] WHILE")
-        print(f"│   └─ condition:   {ctx.expr().getText()}")
+        self._log(f"│\n└─[LINE {line}] WHILE")
+        self._log(f"│   └─ condition:   {ctx.expr().getText()}")
         self.in_conditional_block = True
         while self.visit(ctx.expr()):
             for stmt in ctx.block().statement():
                 result = self.visit(stmt)
                 if result is not None:
-                    print(f"[exec] Result at LINE {stmt.start.line}: {result} ({type(result).__name__})")
+                    self._log(f"[exec] Result at LINE {stmt.start.line}: {result} ({type(result).__name__})")
         self.in_conditional_block = False
 
     def visitForLoop(self, ctx):
         line = ctx.start.line
-        print(f"│\n└─[LINE {line}] FOR")
+        self._log(f"│\n└─[LINE {line}] FOR")
         self.visit(ctx.exprStatement(0))  # init
         self.in_conditional_block = True
         while self.visit(ctx.exprStatement(1)):
             for stmt in ctx.block().statement():
                 result = self.visit(stmt)
                 if result is not None:
-                    print(f"[exec] Result at LINE {stmt.start.line}: {result} ({type(result).__name__})")
+                    self._log(f"[exec] Result at LINE {stmt.start.line}: {result} ({type(result).__name__})")
             self.visit(ctx.expr())  # increment
         self.in_conditional_block = False
 
@@ -327,3 +335,4 @@ class SASEvaluator(SASParserVisitor):
     def visitProgram(self, ctx: SASParser.ProgramContext):
         for stmt in ctx.statement():
             self.visit(stmt)
+        self.write_output()
