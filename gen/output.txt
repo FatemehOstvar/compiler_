@@ -44,7 +44,7 @@
 │   ├─ operator   >
 │   └─ right      0
 │
-└─[LINE 9] IF
+└─[LINE 9] 9
 │   ├─ condition  x>0
 │   ├─ result     True
 │   └─ type       conditional
@@ -54,13 +54,10 @@
 │   ├─ result     4
 │   └─ type       int
 │
-└─[LINE 12] ELSE IF
-│   ├─ condition  x<0
-│   ├─ result     False
-│   └─ type       conditional
-│
-└─[LINE 15] ELSE
-│   └─ type       conditional
+└─[LINE 12] COMPARE
+│   ├─ left       9
+│   ├─ operator   <
+│   └─ right      0
 │
 └─[LINE 18] VAR
 │   ├─ name       i
@@ -175,3 +172,8 @@
 │
 └─[LINE 30] CALL
 │   └─ expression square(9)
+│
+└─[LINE 32] FUNCTION
+│   ├─ name       gio
+│   ├─ returns    int
+│   └─ params     (none)

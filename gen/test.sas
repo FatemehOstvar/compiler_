@@ -27,8 +27,9 @@ while (count < 5) {
 int square(int n) {
     n = n * n;
 }
-square('e');
+square(x);
 
+int gio(){};
 
 /*class Foo {
     int bar(int z) {

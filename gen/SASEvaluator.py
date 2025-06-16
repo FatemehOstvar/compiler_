@@ -10,7 +10,6 @@ class SASEvaluator(SASParserVisitor):
         self.decl_lines = {}
         self.in_conditional_block = False
         self.functions = {}
-
         self.output_lines = []
 
     def _log(self, line):
@@ -97,7 +96,7 @@ class SASEvaluator(SASParserVisitor):
 
         if var_name in self.types:
             expected = self.types[var_name]
-            if expected == 'int' and isinstance(value, float):
+            if expected == L.INT and isinstance(value, float):
                 raise TypeError(f"Type error: cannot assign float '{value}' to int '{var_name}'")
         else:
             raise NameError(f"Undeclared variable '{var_name}'")
@@ -191,13 +190,13 @@ class SASEvaluator(SASParserVisitor):
 
     def _matches_type(self, expected_type, value):
         type_checks = {
-            'int': int,
-            'float': float,
-            'string': str,
-            'char': str,
-            'bool': bool
+            L.INT: int,
+            L.FLOAT: float,
+            L.STRING: str,
+            L.CHAR: str,
+            L.BOOL: bool
         }
-        if expected_type == 'char':
+        if expected_type == L.CHAR:
             return isinstance(value, str) and len(value) == 1
         return isinstance(value, type_checks.get(expected_type, object))
 
@@ -260,13 +259,13 @@ class SASEvaluator(SASParserVisitor):
             self._log_event("FUNCTION", line, name=name, returns=return_type, params="(none)")
 
     def visitIfStatement(self, ctx):
-        matched = self._handle_branch(ctx.ifBlock(), "IF")
+        matched = self._handle_branch(ctx.ifBlock(), L.IF)
 
         for elif_ctx in ctx.elseIfBlock( ):
             if not matched:
-                matched = self._handle_branch(elif_ctx, "ELSE IF")
+                matched = self._handle_branch(elif_ctx, L.ELSEIF)
             else:
-                self._print_branch_info_only(elif_ctx, "ELSE IF")
+                self._print_branch_info_only(elif_ctx, L.ELSEIF)
 
         if ctx.elseBlock() :
             self._handle_else(ctx.elseBlock(), matched)

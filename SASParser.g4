@@ -61,7 +61,7 @@ funcDecl
     ;
 
 funcHeader
-    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING ) IDENTIFIER LPAREN paramList? RPAREN
+    : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING | VOID ) IDENTIFIER LPAREN paramList? RPAREN
     ;
 
 paramList

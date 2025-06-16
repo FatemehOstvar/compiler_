@@ -11,10 +11,13 @@ CHAR : 'char';
 STRING : 'string';
 IF : 'if';
 ELSE : 'else';
+ELSEIF: 'else if';
 FOR : 'for';
 WHILE : 'while';
 RETURN : 'return';
 CLASS : 'class';
+VOID : 'void';
+
 // Assignment Operators
 ASSIGNMENT_OPERATOR
     : '+='
