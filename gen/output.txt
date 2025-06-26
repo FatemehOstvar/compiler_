@@ -177,3 +177,6 @@
 │   ├─ name       gio
 │   ├─ returns    int
 │   └─ params     (none)
+│
+└─[LINE 34] CLASS
+│   └─ name       Foo

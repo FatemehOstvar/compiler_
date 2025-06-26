@@ -31,10 +31,10 @@ square(x);
 
 int gio(){};
 
-/*class Foo {
+class Foo {
     int bar(int z) {
         return z * 2;
     }
-}double, char and bool arent handles as well.float u = 3;*/
+}/*double, char and bool arent handles as well.float u = 3;*/
 
 

@@ -1,6 +1,6 @@
 from SASParserVisitor import SASParserVisitor
 from SASParser import SASParser
-from SASLexer import SASLexer as L
+from SASLexer import SASLexer as Lexer
 from semantics import TypeMismatchError, SemanticError, UnsupportedOperationError
 
 class SASEvaluator(SASParserVisitor):
@@ -41,10 +41,12 @@ class SASEvaluator(SASParserVisitor):
 
         return value
 
-    def _extract_declared_type(self, ctx):
+    @staticmethod
+    def _extract_declared_type(ctx):
         return ctx.getChild(0).getText()
 
-    def _extract_var_name(self, ctx):
+    @staticmethod
+    def _extract_var_name(ctx):
         return ctx.IDENTIFIER().getText()
 
     def _extract_value(self, ctx):
@@ -58,7 +60,8 @@ class SASEvaluator(SASParserVisitor):
         self.types[var_name] = actual_type
         self.decl_lines[var_name] = line
 
-    def _validate_declared_type(self, declared_type, value, var_name, line):
+    @staticmethod
+    def _validate_declared_type(declared_type, value, var_name, line):
         type_checks = {
             'int': lambda v: isinstance(v, int),
             'float': lambda v: isinstance(v, float),
@@ -71,6 +74,7 @@ class SASEvaluator(SASParserVisitor):
         if check and not check(value):
             raise TypeMismatchError(declared_type, type(value).__name__, var_name, line)
 
+
     def visitUnaryOpExpr(self, ctx: SASParser.UnaryOpExprContext):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
@@ -78,13 +82,13 @@ class SASEvaluator(SASParserVisitor):
         op_token = ctx.getChild(0).getSymbol().type
         value = self.visit(ctx.getChild(1))
 
-        if op_token == L.MINUS:
+        if op_token == Lexer.MINUS:
             return -value
-        elif op_token == L.PLUS:
+        elif op_token == Lexer.PLUS:
             return +value
-        elif op_token == L.LOGICAL_OPERATOR and ctx.getChild(0).getText() == '!':
+        elif op_token == Lexer.LOGICAL_OPERATOR and ctx.getChild(0).getText( ) == '!':
             return not value
-        elif op_token == L.BITWISE_OPERATOR and ctx.getChild(0).getText() == '~':
+        elif op_token == Lexer.BITWISE_OPERATOR and ctx.getChild(0).getText( ) == '~':
             return ~value
         else:
             raise SemanticError(f"Line {ctx.start.line}: Unsupported unary operator: {ctx.getChild(0).getText()}", ctx.start.line)
@@ -96,7 +100,7 @@ class SASEvaluator(SASParserVisitor):
 
         if var_name in self.types:
             expected = self.types[var_name]
-            if expected == L.INT and isinstance(value, float):
+            if expected == Lexer.INT and isinstance(value, float):
                 raise TypeError(f"Type error: cannot assign float '{value}' to int '{var_name}'")
         else:
             raise NameError(f"Undeclared variable '{var_name}'")
@@ -110,9 +114,9 @@ class SASEvaluator(SASParserVisitor):
         left = self.visit(ctx.getChild(0))
         op_token = ctx.getChild(1).symbol.type
         right = self.visit(ctx.getChild(2))
-        if op_token == L.PLUS:
+        if op_token == Lexer.PLUS:
             return left + right
-        elif op_token == L.MINUS:
+        elif op_token == Lexer.MINUS:
             return left - right
     def visitMulDivMod(self, ctx):
         if ctx.getChildCount() == 1:
@@ -122,9 +126,9 @@ class SASEvaluator(SASParserVisitor):
         right = self.visit(ctx.getChild(2))
 
         operations = {
-            L.MULT: lambda l, r: l * r,
-            L.DIV: lambda l, r: l / r,
-            L.MOD: lambda l, r: l % r
+            Lexer.MULT: lambda l, r: l * r,
+            Lexer.DIV: lambda l, r: l / r,
+            Lexer.MOD: lambda l, r: l % r
         }
 
         if op_token in operations:
@@ -147,14 +151,15 @@ class SASEvaluator(SASParserVisitor):
 
         return self._evaluate_comparison(op_token, op_text, left, right, ctx)
 
-    def _evaluate_comparison(self, token_type, token_text, left, right, ctx):
+    @staticmethod
+    def _evaluate_comparison(token_type, token_text, left, right, ctx):
         ops = {
-            L.EQ: lambda l, r: l == r,
-            L.NEQ: lambda l, r: l != r,
-            L.LT: lambda l, r: l < r,
-            L.LEQ: lambda l, r: l <= r,
-            L.GT: lambda l, r: l > r,
-            L.GEQ: lambda l, r: l >= r,
+            Lexer.EQ: lambda l, r: l == r,
+            Lexer.NEQ: lambda l, r: l != r,
+            Lexer.LT: lambda l, r: l < r,
+            Lexer.LEQ: lambda l, r: l <= r,
+            Lexer.GT: lambda l, r: l > r,
+            Lexer.GEQ: lambda l, r: l >= r,
         }
         op_func = ops.get(token_type)
         if op_func:
@@ -188,15 +193,16 @@ class SASEvaluator(SASParserVisitor):
 
         return None
 
-    def _matches_type(self, expected_type, value):
+    @staticmethod
+    def _matches_type(expected_type, value):
         type_checks = {
-            L.INT: int,
-            L.FLOAT: float,
-            L.STRING: str,
-            L.CHAR: str,
-            L.BOOL: bool
+            Lexer.INT: int,
+            Lexer.FLOAT: float,
+            Lexer.STRING: str,
+            Lexer.CHAR: str,
+            Lexer.BOOL: bool
         }
-        if expected_type == L.CHAR:
+        if expected_type == Lexer.CHAR:
             return isinstance(value, str) and len(value) == 1
         return isinstance(value, type_checks.get(expected_type, object))
 
@@ -213,23 +219,29 @@ class SASEvaluator(SASParserVisitor):
 
     def _get_literal_parser(self, token_type, ctx):
         return {
-            L.TRUE: lambda _: True,
-            L.FALSE: lambda _: False,
-            L.STRING_LITERAL: lambda t: t.strip('"'),
-            L.CHAR_LITERAL: lambda t: self._parse_char_literal(t, ctx),
-            L.FLOAT_LITERAL: float,
-            L.SCIENTIFIC_LITERAL: float,
-            L.INTEGER_LITERAL: int,
-            L.HEX_LITERAL: lambda t: int(t, 16),
-            L.BINARY_LITERAL: lambda t: int(t, 2),
-            L.OCTAL_LITERAL: lambda t: int(t, 8),
+            Lexer.TRUE: lambda _: True,
+            Lexer.FALSE: lambda _: False,
+            Lexer.STRING_LITERAL: lambda t: t.strip('"'),
+            Lexer.CHAR_LITERAL: lambda t: self._parse_char_literal(t, ctx),
+            Lexer.FLOAT_LITERAL: float,
+            Lexer.SCIENTIFIC_LITERAL: float,
+            Lexer.INTEGER_LITERAL: int,
+            Lexer.HEX_LITERAL: lambda t: int(t, 16),
+            Lexer.BINARY_LITERAL: lambda t: int(t, 2),
+            Lexer.OCTAL_LITERAL: lambda t: int(t, 8),
         }.get(token_type)
 
-    def _parse_char_literal(self, t, ctx):
+    @staticmethod
+    def _parse_char_literal( t, ctx):
         stripped = t.strip("'")
         if len(stripped) != 1:
             raise SemanticError(f"Invalid char literal: {t}", ctx.start.line)
         return stripped
+
+    def visitClassDecl(self, ctx):
+        line = ctx.start.line
+        name = ctx.IDENTIFIER( ).getText( )
+        self._log_event("CLASS", line, name=name)
 
     def visitFuncDecl(self, ctx):
         header = ctx.funcHeader()
@@ -259,13 +271,13 @@ class SASEvaluator(SASParserVisitor):
             self._log_event("FUNCTION", line, name=name, returns=return_type, params="(none)")
 
     def visitIfStatement(self, ctx):
-        matched = self._handle_branch(ctx.ifBlock(), L.IF)
+        matched = self._handle_branch(ctx.ifBlock(), Lexer.IF)
 
         for elif_ctx in ctx.elseIfBlock( ):
             if not matched:
-                matched = self._handle_branch(elif_ctx, L.ELSEIF)
+                matched = self._handle_branch(elif_ctx, Lexer.ELSEIF)
             else:
-                self._print_branch_info_only(elif_ctx, L.ELSEIF)
+                self._print_branch_info_only(elif_ctx, Lexer.ELSEIF)
 
         if ctx.elseBlock() :
             self._handle_else(ctx.elseBlock(), matched)
@@ -295,10 +307,12 @@ class SASEvaluator(SASParserVisitor):
         )
         return True
 
-    def _get_branch_line(self, branch_ctx):
+    @staticmethod
+    def _get_branch_line(branch_ctx):
         return branch_ctx.start.line
 
-    def _get_expr_text(self, branch_ctx):
+    @staticmethod
+    def _get_expr_text(branch_ctx):
         return branch_ctx.expr().getText()
 
     def _evaluate_and_validate_condition(self, branch_ctx, label, line):
@@ -316,7 +330,9 @@ class SASEvaluator(SASParserVisitor):
 
     def _print_condition_info(self, line, label, expr_text, result, result_type):
         self._log_event(label, line, condition=expr_text, result=result, type=result_type)
-    def _validate_condition_type(self, value, value_type, label, line):
+
+    @staticmethod
+    def _validate_condition_type(value, value_type, label, line):
         if not isinstance(value, bool):
             raise TypeMismatchError('bool', value_type, f'<{label.lower()} condition>', line)
 
