@@ -6,15 +6,16 @@ char v = 's';
 float n = 4.2;
 double k = 3.7098786;
 int z = x + y;
-if (x > 0) {
-    y = y + 1;
+if (x == 9) {
+    y = 12;
 }
-else if (x < 0)  {
-    y = y - 1;
+elsif (x > 50) {
+    y = 2;
 }
 else {
-y = 1;
+    y = 1;
 }
+
 int i = 0;
 for (i = 0; i < 3; i = i + 1) {
     z = z + 1;
@@ -26,15 +27,25 @@ while (count < 5) {
 }
 int square(int n) {
     n = n * n;
+    return n;
 }
 square(x);
 
+/*if (x > 0) {
+    y = y + 1;
+}
+elsif (x < 0)  {
+    y = y - 1;
+}
+else {
+y = 1;
+}
 int gio(){};
-
-/*class Foo {
+class Foo {
     int bar(int z) {
         return z * 2;
     }
-}double, char and bool arent handles as well.float u = 3;*/
+}double, char and bool arent handles as well.float u = 3;
+*/
 
 

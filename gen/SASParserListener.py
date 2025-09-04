@@ -53,12 +53,12 @@ class SASParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SASParser#ifStatement.
-    def enterIfStatement(self, ctx:SASParser.IfStatementContext):
+    # Enter a parse tree produced by SASParser#elseIfBlock.
+    def enterElseIfBlock(self, ctx:SASParser.ElseIfBlockContext):
         pass
 
-    # Exit a parse tree produced by SASParser#ifStatement.
-    def exitIfStatement(self, ctx:SASParser.IfStatementContext):
+    # Exit a parse tree produced by SASParser#elseIfBlock.
+    def exitElseIfBlock(self, ctx:SASParser.ElseIfBlockContext):
         pass
 
 
@@ -71,21 +71,21 @@ class SASParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SASParser#elseIfBlock.
-    def enterElseIfBlock(self, ctx:SASParser.ElseIfBlockContext):
-        pass
-
-    # Exit a parse tree produced by SASParser#elseIfBlock.
-    def exitElseIfBlock(self, ctx:SASParser.ElseIfBlockContext):
-        pass
-
-
     # Enter a parse tree produced by SASParser#elseBlock.
     def enterElseBlock(self, ctx:SASParser.ElseBlockContext):
         pass
 
     # Exit a parse tree produced by SASParser#elseBlock.
     def exitElseBlock(self, ctx:SASParser.ElseBlockContext):
+        pass
+
+
+    # Enter a parse tree produced by SASParser#ifStatement.
+    def enterIfStatement(self, ctx:SASParser.IfStatementContext):
+        pass
+
+    # Exit a parse tree produced by SASParser#ifStatement.
+    def exitIfStatement(self, ctx:SASParser.IfStatementContext):
         pass
 
 

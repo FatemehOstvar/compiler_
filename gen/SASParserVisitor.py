@@ -34,8 +34,8 @@ class SASParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SASParser#ifStatement.
-    def visitIfStatement(self, ctx:SASParser.IfStatementContext):
+    # Visit a parse tree produced by SASParser#elseIfBlock.
+    def visitElseIfBlock(self, ctx:SASParser.ElseIfBlockContext):
         return self.visitChildren(ctx)
 
 
@@ -44,13 +44,13 @@ class SASParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SASParser#elseIfBlock.
-    def visitElseIfBlock(self, ctx:SASParser.ElseIfBlockContext):
+    # Visit a parse tree produced by SASParser#elseBlock.
+    def visitElseBlock(self, ctx:SASParser.ElseBlockContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SASParser#elseBlock.
-    def visitElseBlock(self, ctx:SASParser.ElseBlockContext):
+    # Visit a parse tree produced by SASParser#ifStatement.
+    def visitIfStatement(self, ctx:SASParser.IfStatementContext):
         return self.visitChildren(ctx)
 
 

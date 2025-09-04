@@ -41,139 +41,137 @@
 │
 └─[LINE 9] COMPARE
 │   ├─ left       9
-│   ├─ operator   >
-│   └─ right      0
+│   ├─ operator   ==
+│   └─ right      9
 │
-└─[LINE 9] 9
-│   ├─ condition  x>0
+└─[LINE 9] 10
+│   ├─ condition  x==9
 │   ├─ result     True
 │   └─ type       conditional
 │
 └─[LINE 10] EXEC
-│   ├─ statement  y=y+1;
-│   ├─ result     4
+│   ├─ statement  y=12;
+│   ├─ result     12
 │   └─ type       int
 │
-└─[LINE 12] COMPARE
-│   ├─ left       9
-│   ├─ operator   <
-│   └─ right      0
+└─[LINE 12] 9
+│   ├─ condition  x>50
+│   ├─ result     False
+│   └─ type       conditional
 │
-└─[LINE 18] VAR
+└─[LINE 15] ELSE
+│   └─ type       conditional
+│
+└─[LINE 19] VAR
 │   ├─ name       i
 │   ├─ value      0
 │   └─ type       int
 │
-└─[LINE 19] FOR
+└─[LINE 20] FOR
 │
-└─[LINE 19] COMPARE
+└─[LINE 20] COMPARE
 │   ├─ left       0
 │   ├─ operator   <
 │   └─ right      3
 │
-└─[LINE 20] EXEC
+└─[LINE 21] EXEC
 │   ├─ statement  z=z+1;
 │   ├─ result     13
 │   └─ type       int
 │
-└─[LINE 19] COMPARE
+└─[LINE 20] COMPARE
 │   ├─ left       1
 │   ├─ operator   <
 │   └─ right      3
 │
-└─[LINE 20] EXEC
+└─[LINE 21] EXEC
 │   ├─ statement  z=z+1;
 │   ├─ result     14
 │   └─ type       int
 │
-└─[LINE 19] COMPARE
+└─[LINE 20] COMPARE
 │   ├─ left       2
 │   ├─ operator   <
 │   └─ right      3
 │
-└─[LINE 20] EXEC
+└─[LINE 21] EXEC
 │   ├─ statement  z=z+1;
 │   ├─ result     15
 │   └─ type       int
 │
-└─[LINE 19] COMPARE
+└─[LINE 20] COMPARE
 │   ├─ left       3
 │   ├─ operator   <
 │   └─ right      3
 │
-└─[LINE 23] VAR
+└─[LINE 24] VAR
 │   ├─ name       count
 │   ├─ value      0
 │   └─ type       int
 │
-└─[LINE 24] WHILE
+└─[LINE 25] WHILE
 │   └─ condition  count<5
 │
-└─[LINE 24] COMPARE
+└─[LINE 25] COMPARE
 │   ├─ left       0
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 25] EXEC
+└─[LINE 26] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     1
 │   └─ type       int
 │
-└─[LINE 24] COMPARE
+└─[LINE 25] COMPARE
 │   ├─ left       1
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 25] EXEC
+└─[LINE 26] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     2
 │   └─ type       int
 │
-└─[LINE 24] COMPARE
+└─[LINE 25] COMPARE
 │   ├─ left       2
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 25] EXEC
+└─[LINE 26] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     3
 │   └─ type       int
 │
-└─[LINE 24] COMPARE
+└─[LINE 25] COMPARE
 │   ├─ left       3
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 25] EXEC
+└─[LINE 26] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     4
 │   └─ type       int
 │
-└─[LINE 24] COMPARE
+└─[LINE 25] COMPARE
 │   ├─ left       4
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 25] EXEC
+└─[LINE 26] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     5
 │   └─ type       int
 │
-└─[LINE 24] COMPARE
+└─[LINE 25] COMPARE
 │   ├─ left       5
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 27] FUNCTION
+└─[LINE 28] FUNCTION
 │   ├─ name       square
 │   └─ returns    int
 │   └─ params:
 │       ├─ n: int
 │
-└─[LINE 30] CALL
+└─[LINE 32] CALL
 │   └─ expression square(9)
-│
-└─[LINE 32] FUNCTION
-│   ├─ name       gio
-│   ├─ returns    int
-│   └─ params     (none)

@@ -263,9 +263,9 @@ class SASEvaluator(SASParserVisitor):
 
         for elif_ctx in ctx.elseIfBlock( ):
             if not matched:
-                matched = self._handle_branch(elif_ctx, L.ELSEIF)
+                matched = self._handle_branch(elif_ctx, L.ELSIF)
             else:
-                self._print_branch_info_only(elif_ctx, L.ELSEIF)
+                self._print_branch_info_only(elif_ctx, L.ELSIF)
 
         if ctx.elseBlock() :
             self._handle_else(ctx.elseBlock(), matched)

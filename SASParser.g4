@@ -27,20 +27,20 @@ varDecl
     : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING) IDENTIFIER (ASSIGN expr)? SEMI
     ;
 
-ifStatement
-    : ifBlock elseIfBlock* elseBlock?
+elseIfBlock
+    : ELSIF LPAREN expr RPAREN block
     ;
 
 ifBlock
     : IF LPAREN expr RPAREN block
     ;
 
-elseIfBlock
-    : ELSE IF LPAREN expr RPAREN block
-    ;
-
 elseBlock
     : ELSE block
+    ;
+
+ifStatement
+    : ifBlock elseIfBlock* elseBlock?
     ;
 
 loopStatement
