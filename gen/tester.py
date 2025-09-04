@@ -35,6 +35,17 @@ sys.path.insert(0, os.path.abspath("."))
 from SASLexer import SASLexer
 from SASParser import SASParser
 from SASEvaluator import SASEvaluator
+from ast_builder import SASAstBuilder
+
+def build_ast_from_file(filename: str):
+    input_stream = FileStream(filename, encoding="utf-8")
+    lexer = SASLexer(input_stream)
+    token_stream = CommonTokenStream(lexer)
+    parser = SASParser(token_stream)
+    tree = parser.program()
+    builder = SASAstBuilder()
+    return builder.visit(tree)  # Program
+
 
 
 def dump_tokens(token_stream, lexer):
@@ -135,3 +146,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # ast = build_ast_from_file("test.sas")

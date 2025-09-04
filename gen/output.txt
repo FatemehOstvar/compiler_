@@ -104,74 +104,77 @@
 │   ├─ operator   <
 │   └─ right      3
 │
-└─[LINE 24] VAR
+└─[LINE 23] CLASS
+│   └─ name       t
+│
+└─[LINE 30] VAR
 │   ├─ name       count
 │   ├─ value      0
 │   └─ type       int
 │
-└─[LINE 25] WHILE
+└─[LINE 31] WHILE
 │   └─ condition  count<5
 │
-└─[LINE 25] COMPARE
+└─[LINE 31] COMPARE
 │   ├─ left       0
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 26] EXEC
+└─[LINE 32] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     1
 │   └─ type       int
 │
-└─[LINE 25] COMPARE
+└─[LINE 31] COMPARE
 │   ├─ left       1
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 26] EXEC
+└─[LINE 32] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     2
 │   └─ type       int
 │
-└─[LINE 25] COMPARE
+└─[LINE 31] COMPARE
 │   ├─ left       2
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 26] EXEC
+└─[LINE 32] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     3
 │   └─ type       int
 │
-└─[LINE 25] COMPARE
+└─[LINE 31] COMPARE
 │   ├─ left       3
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 26] EXEC
+└─[LINE 32] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     4
 │   └─ type       int
 │
-└─[LINE 25] COMPARE
+└─[LINE 31] COMPARE
 │   ├─ left       4
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 26] EXEC
+└─[LINE 32] EXEC
 │   ├─ statement  count=count+1;
 │   ├─ result     5
 │   └─ type       int
 │
-└─[LINE 25] COMPARE
+└─[LINE 31] COMPARE
 │   ├─ left       5
 │   ├─ operator   <
 │   └─ right      5
 │
-└─[LINE 28] FUNCTION
+└─[LINE 34] FUNCTION
 │   ├─ name       square
 │   └─ returns    int
 │   └─ params:
 │       ├─ n: int
 │
-└─[LINE 32] CALL
+└─[LINE 38] CALL
 │   └─ expression square(9)

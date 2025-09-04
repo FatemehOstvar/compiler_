@@ -353,6 +353,11 @@ class SASEvaluator(SASParserVisitor):
 
         self.in_conditional_block = False
 
+    def visitClassDecl(self, ctx):
+        name = ctx.IDENTIFIER( ).getText( )
+        line = ctx.start.line
+        self._log_event("CLASS", line, name=name)
+
     def visitForLoop(self, ctx):
         line = ctx.start.line
         self._log_event("FOR", line)

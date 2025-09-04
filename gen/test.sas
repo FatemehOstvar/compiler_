@@ -20,7 +20,13 @@ int i = 0;
 for (i = 0; i < 3; i = i + 1) {
     z = z + 1;
 }
-
+class t {
+    int square(int n) {
+    n = n * n;
+    return n;
+}
+}
+;
 int count = 0;
 while (count < 5) {
     count = count + 1;

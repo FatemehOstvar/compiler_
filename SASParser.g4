@@ -3,14 +3,14 @@ parser grammar SASParser;
 options { tokenVocab = SASLexer; }
 
 program
-    : (preprocessor | statement)* EOF
+    : preprocessor? statement* EOF
     ;
 returnStatement
     : RETURN expr SEMI
     ;
 
 preprocessor
-    : PREPROCESSOR_DIRECTIVE IDENTIFIER
+    : PREPROCESSOR_DIRECTIVE
     ;
 
 statement
@@ -72,16 +72,14 @@ param
     : (INT | FLOAT | DOUBLE | CHAR | BOOL | STRING) IDENTIFIER
     ;
 
-classDecl
-    : CLASS IDENTIFIER LBRACE classBody RBRACE
-    ;
+classDecl : CLASS IDENTIFIER  LBRACE classBody RBRACE  SEMI;
 
 classBody
     : (varDecl | funcDecl)*
     ;
 
 exprStatement
-    : { self._input.LA(1) != SASLexer.RETURN }? expr SEMI
+    : expr SEMI
     ;
 
 expr
