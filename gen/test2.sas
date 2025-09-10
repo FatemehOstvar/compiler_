@@ -7,7 +7,7 @@ class Circle {
     double area() {
         return PI * radius * radius;
     }
-}
+};
 
 int add(int a, int b) {
     return a + b;
@@ -20,7 +20,7 @@ int main() {
 
     if (x < y) {
         x = x + 1;
-    } else if (x == y) {
+    } elsif (x == y) {
         x = x * 2;
     } else {
         x = x - 1;

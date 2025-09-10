@@ -3,7 +3,7 @@ parser grammar SASParser;
 options { tokenVocab = SASLexer; }
 
 program
-    : preprocessor? statement* EOF
+    : preprocessor* statement* EOF
     ;
 returnStatement
     : RETURN expr SEMI
@@ -49,7 +49,7 @@ loopStatement
     ;
 
 forLoop
-    : FOR LPAREN exprStatement exprStatement expr RPAREN block
+    : FOR LPAREN (exprStatement|varDecl) exprStatement expr RPAREN block
     ;
 
 whileLoop
